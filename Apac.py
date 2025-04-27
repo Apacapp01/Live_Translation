@@ -267,9 +267,15 @@ if input_choice == "Live Webcam":
                             predicted_label = labels[predicted_class]  # <== Add this
 
                             if predicted_label != previous_word:
-                                sentence += " " + predicted_label
-                                previous_word = predicted_label
+                                if previous_word in ["How", "how", "What", "what", "where", "Where"] and predicted_label == "your":
+                                    sentence += " are"
+                                    previous_word = "are"  # Update previous_word also
+                                else:
+                                    sentence += " " + predicted_label
+                                    previous_word = predicted_label
+
                                 last_prediction_time = current_time
+
 
                                 # Check for chatbot response
                                 cleaned_sentence = sentence.lower().strip()
